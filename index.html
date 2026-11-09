@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HRIDOY TELECOM – Print Orders</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1 id="logo" tabindex="-1"><span class="dots"><i></i><i></i><i></i><i></i></span>HRIDOY TELECOM</h1>
+  <p>Choose a service, pick your files, and we will print them.</p>
+</header>
+
+<main>
+  <section class="cards" id="cards">
+    <button class="card bw" data-s="bw"><b>Print Black and White</b><span class="price">৳10</span><small>per page</small></button>
+    <button class="card color" data-s="color"><b>Print Color Copy</b><span class="price">৳20</span><small>per page</small></button>
+    <button class="card passport" data-s="passport"><b>Passport Size Picture</b><span class="price">৳60</span><small>minimum 4 copies</small></button>
+  </section>
+
+  <section id="order" class="panel" hidden>
+    <h2 id="oTitle"></h2>
+    <label class="f">Copies
+      <input id="copies" type="number" min="1" max="500" value="1" inputmode="numeric">
+    </label>
+    <label class="f">Enter the last 4 digits of your mobile number.
+      <input id="last4" inputmode="numeric" maxlength="4" pattern="\d{4}" placeholder="0000" autocomplete="off">
+    </label>
+    <ul id="fileList"></ul>
+    <div class="row">
+      <button id="more" class="ghost" type="button">Add more files</button>
+      <button id="upload" class="primary" type="button">Upload</button>
+    </div>
+    <p id="msg" role="status"></p>
+    <div id="done" hidden>
+      <h3>Your files have been successfully uploaded!</h3>
+      <p>Order ID <strong id="oid"></strong></p>
+      <p class="note">For privacy, uploaded files are removed automatically 2 minutes after upload.</p>
+      <button id="again" class="primary" type="button">Start a new order</button>
+    </div>
+  </section>
+</main>
+
+<input id="picker" type="file" multiple hidden
+  accept=".jpg,.jpeg,.png,.webp,.pdf,.doc,.docx,.xls,.xlsx">
+
+<!-- Admin: PIN -->
+<div id="pinBox" class="overlay" hidden>
+  <form id="pinForm" class="modal">
+    <h2>Admin access</h2>
+    <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="Admin PIN">
+    <p id="pinMsg" role="status"></p>
+    <div class="row"><button type="button" id="pinCancel" class="ghost">Cancel</button><button class="primary">Sign in</button></div>
+  </form>
+</div>
+
+<!-- Admin: dashboard -->
+<div id="admin" class="overlay full" hidden>
+  <div class="dash">
+    <div class="dtop">
+      <h2>Dashboard</h2>
+      <div class="row"><button id="refresh" class="ghost">Refresh</button><button id="logout" class="ghost">Sign out</button></div>
+    </div>
+    <div id="stats" class="stats"></div>
+    <div class="filters">
+      <input id="q" type="search" placeholder="Search order ID, digits, file name">
+      <select id="fService"><option value="">All services</option><option value="bw">Black &amp; White</option><option value="color">Color Copy</option><option value="passport">Passport Photo</option></select>
+      <select id="fStatus"><option value="">All statuses</option><option value="pending">Pending</option><option value="printing">Printing</option><option value="completed">Completed</option></select>
+    </div>
+    <p id="dmsg" role="status"></p>
+    <div id="rows"></div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
